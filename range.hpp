@@ -67,6 +67,13 @@ namespace itertools{
 		iterator end() {
 			return iterator{&finish};
 		}
+		
+		//Auxilary method for testing the program
+		void print(){
+			for(T current : *this)
+				cout << current; 
+			cout << endl;
+		}
 
 
 	};//end of class range
