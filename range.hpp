@@ -68,11 +68,13 @@ namespace itertools{
 			return iterator{&finish};
 		}
 		
-		//Auxilary method for testing the program
-		void print(){
+		//Auxiliary method for testing the program. not perfect - 
+		//need to implement diffrenet methods for char, and for double we need to move the digits after te dot
+		string print(){
+			string output = "";
 			for(T current : *this)
-				cout << current; 
-			cout << endl;
+				output += to_string(current) + " "; 
+			return output;
 		}
 
 
