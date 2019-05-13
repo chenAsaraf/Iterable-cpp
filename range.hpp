@@ -21,16 +21,16 @@ namespace itertools{
 		//-------------------------------------------------------------------
 		class iterator {
 			private:
-			T* value;
+			T value;
 			
 			public:
 			//Constructor
-			iterator(T* rangeStartElement):  value(rangeStartElement){}
+			iterator(T rangeStartElement):  value(rangeStartElement){}
 
 			// The method is const as this operator does not allow changing of the iterator.
 			// Note that it returns T& as it allows to change what it points to.
 			T operator*() const {
-				return *value;
+				return value;
 			}
 
 			T* operator->() const {
@@ -39,7 +39,7 @@ namespace itertools{
 
 			// ++i; 
 			iterator* operator++() {
-				(*value)++;
+				value++;
 				return this;
 			}
 
@@ -47,36 +47,28 @@ namespace itertools{
 			// Usually iterators are passed by value and not by const& as they are small.
 			const iterator operator++(int) {
 				iterator tmp= *this;
-				(*value)++;
+				value++;
 				return tmp; 		
 			}
 
-			bool operator==(const iterator& rhs) const {
-				return *value != *(rhs.value);
+			bool operator==(const iterator& other) const {
+				return value == (other.value);
 			}
 
-			bool operator!=(const iterator& rhs) const {
-				return *value != *(rhs.value);
+			bool operator!=(const iterator& other) const {
+				return value != (other.value);
 			}
 		}; //end iterator
 
-		iterator begin() {
-			return iterator{&start};
+		iterator begin() const{
+			return iterator{start};
 		}
 		
-		iterator end() {
-			return iterator{&finish};
-		}
-		
-		//Auxiliary method for testing the program. not perfect - 
-		//need to implement diffrenet methods for char, and for double we need to move the digits after te dot
-		string print(){
-			string output = "";
-			for(T current : *this)
-				output += to_string(current) + " "; 
-			return output;
+		iterator end() const{
+			return iterator{finish};
 		}
 
+		
 
 	};//end of class range
 };//end namespace itertools
