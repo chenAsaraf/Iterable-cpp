@@ -18,12 +18,12 @@ using namespace std;
 using namespace itertools;
 
  //Auxiliary method
-template<typename T> string tostring(const T& iterable){
+template<typename T> string tostring(const T& iter){
     ostringstream ostr;
     // cout << fixed;
     // cout << std::setprecision(1);
     bool b = false;
-    for(decltype(*(iterable.begin())) i : iterable){
+    for(decltype(*(iter.begin())) i : iter){
         if(!b) {
             b = true;
             ostr << fixed;

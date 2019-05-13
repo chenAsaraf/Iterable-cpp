@@ -12,7 +12,7 @@ namespace itertools{
 		T finish; 
 
 		//Constructor
-		range(T firstValue, T secondValue) : start(firstValue), finish(secondValue){}
+		range(T firstiValue, T secondiValue) : start(firstiValue), finish(secondiValue){}
 
 
 		//-------------------------------------------------------------------
@@ -21,42 +21,42 @@ namespace itertools{
 		//-------------------------------------------------------------------
 		class iterator {
 			private:
-			T value;
+			T it1;
 			
 			public:
 			//Constructor
-			iterator(T rangeStartElement):  value(rangeStartElement){}
+			iterator(T rangeStartElement):  it1(rangeStartElement){}
 
 			// The method is const as this operator does not allow changing of the iterator.
 			// Note that it returns T& as it allows to change what it points to.
 			T operator*() const {
-				return value;
+				return it1;
 			}
 
 			T* operator->() const {
-				return &value;
+				return &it1;
 			}
 
 			// ++i; 
 			iterator* operator++() {
-				value++;
+				it1++;
 				return this;
 			}
 
 			// i++; 
-			// Usually iterators are passed by value and not by const& as they are small.
+			// Usually iterators are passed by it1 and not by const& as they are small.
 			const iterator operator++(int) {
 				iterator tmp= *this;
-				value++;
+				it1++;
 				return tmp; 		
 			}
 
 			bool operator==(const iterator& other) const {
-				return value == (other.value);
+				return it1 == (other.it1);
 			}
 
 			bool operator!=(const iterator& other) const {
-				return value != (other.value);
+				return it1 != (other.it1);
 			}
 		}; //end iterator
 
