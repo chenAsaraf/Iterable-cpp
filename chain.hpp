@@ -4,28 +4,29 @@ using namespace std;
 
 namespace itertools{
 	
-	template<typename T> class range{
+	template<typename T,typename S> class chain{
 
 		public:
 		//Varaiables
 		T start;
-		T finish; 
+		S start2; 
 
 		//Constructor
-		range(T firstValue, T secondValue) : start(firstValue), finish(secondValue){}
+		chain(T firstValue, S secondValue) : start(firstValue), start2(secondValue){}
 
 
 		//-------------------------------------------------------------------
 		// iterator related code:
 		// inner class and methods that return instances of it)
 		//-------------------------------------------------------------------
-		class iterator {
+		
+		template<typename A,typename B> class iterator {
 			private:
-			T value;
-			
+			A value;
+			B value2;
 			public:
 			//Constructor
-			iterator(T rangeStartElement):  value(rangeStartElement){}
+			iterator(T firstStart, S secondStart):  value(firstStart),value2(secondStart){}
 
 			// The method is const as this operator does not allow changing of the iterator.
 			// Note that it returns T& as it allows to change what it points to.
@@ -60,14 +61,13 @@ namespace itertools{
 			}
 		}; //end iterator
 
-		iterator begin() const{
-			return iterator{start};
+		auto begin() const{
+			return (start.begin(), start2.begin());
 		}
 		
-		iterator end() const{
-			return iterator{finish};
+		auto end() const{
+			return (start.end(), start2.end());
 		}
-
 		
 
 	};//end of class range

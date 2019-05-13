@@ -4,15 +4,14 @@ using namespace std;
 
 namespace itertools{
 	
-	template<typename T> class range{
+	template<typename T> class powerset{
 
-		public:
+		private:
 		//Varaiables
-		T start;
-		T finish; 
-
+		T start; 
+		public:
 		//Constructor
-		range(T firstValue, T secondValue) : start(firstValue), finish(secondValue){}
+		powerset(T firstValue) : start(firstValue){}
 
 
 		//-------------------------------------------------------------------
@@ -29,30 +28,14 @@ namespace itertools{
 
 			// The method is const as this operator does not allow changing of the iterator.
 			// Note that it returns T& as it allows to change what it points to.
-			T operator*() const {
-				return value;
+			auto operator*() const {
+				return *value;
 			}
-
-			T* operator->() const {
-				return &value;
-			}
-
+			
 			// ++i; 
 			iterator* operator++() {
 				value++;
-				return this;
-			}
-
-			// i++; 
-			// Usually iterators are passed by value and not by const& as they are small.
-			const iterator operator++(int) {
-				iterator tmp= *this;
-				value++;
-				return tmp; 		
-			}
-
-			bool operator==(const iterator& other) const {
-				return value == (other.value);
+				return *this;
 			}
 
 			bool operator!=(const iterator& other) const {
@@ -60,12 +43,12 @@ namespace itertools{
 			}
 		}; //end iterator
 
-		iterator begin() const{
-			return iterator{start};
-		}
-		
-		iterator end() const{
-			return iterator{finish};
+		auto begin() const {
+        	return (start.begin());
+    	}
+
+   		auto end() const {
+        	return (start.end());
 		}
 
 		
