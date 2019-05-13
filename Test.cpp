@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include <iomanip>
-
 #include "badkan.hpp"
 #include "range.hpp"
 #include "chain.hpp"
@@ -48,6 +47,9 @@ int main() {
             .CHECK_OUTPUT(tostring(range(5,9)),"5, 6, 7, 8")
             .CHECK_OUTPUT(tostring(range(5.1,10.1)),"5.1, 6.1, 7.1, 8.1, 9.1")
             .CHECK_OUTPUT(tostring(range('k','q')),"k, l, m, n, o, p")
+            .CHECK_OUTPUT(tostring(range(0,6)),"0, 1, 2, 3, 4, 5")
+            .CHECK_OUTPUT(tostring(range(8.2,11.2)),"8.2, 9.2, 10.2")
+            .CHECK_OUTPUT(tostring(range('a','e')),"a, b, c, d")
         ;
 
         testcase.setname("Chain Testing:")
@@ -61,8 +63,21 @@ int main() {
             .CHECK_OUTPUT(tostring(chain(string("like"),string("this"))), "l,i,k,e,t,h,i,s")
             .CHECK_OUTPUT(tostring(chain(range(2,4),range(10,13))),"2,3,10,11,12")
             .CHECK_OUTPUT(tostring(chain(range(5.6,8.6),range(1.2,3.2))), "5.6,7.6,1.2,2.2")
-        ;
+            .CHECK_OUTPUT(tostring(chain(range(1,7),range(5,9))), "1,2,3,4,5,6,7,8")
+            .CHECK_OUTPUT(tostring(chain(range('a','c'),string("hi"))), "a,b,h,i")
+            .CHECK_OUTPUT(tostring(chain(range('e','h'),range('k','n'))), "e,f,g,k,l,m")
+            .CHECK_OUTPUT(tostring(chain(range('b','e'),range(8,11))), "b,c,d,8,9,10")
+            .CHECK_OUTPUT(tostring(chain(range('b','e'),range(5.2,7.2))), "b,c,d,5.2,6.2")
+            .CHECK_OUTPUT(tostring(chain(range(4.9,9.9),string("ironman"))), "4.9,5.9,6.9,7.9,8.9,i,r,o,n,m,a,n")
+            .CHECK_OUTPUT(tostring(chain(range(8, 10),range(11.2,13.2))), "8,9,11.2,12.2")          
+            .CHECK_OUTPUT(tostring(chain(string("thor"),range(11,13))), "t,h,o,r,11,12")  
+            .CHECK_OUTPUT(tostring(chain(string("the"),string("hulk"))), "t,h,e,h,u,l,k")
+            .CHECK_OUTPUT(tostring(chain(range(14,18),range(11,13))),"14,15,16,17,11,12")
+            .CHECK_OUTPUT(tostring(chain(range(9.2,11.2),range(5.5,8.5))), "9.2,10.2,5.5,6.5,7.5")
+            .CHECK_OUTPUT(tostring(chain(range(20,23),range(15,19))), "20,21,22,15,16,17,18")
 
+        ;
+//new tests done till here
         testcase.setname("ZIP TESTING:")
             .CHECK_OUTPUT(tostring(zip(range(1,6),string("hello"))), "h 2,e 3,l 4,l 5,o 1")
             .CHECK_OUTPUT(tostring(zip(range(1.3,5.3),string("hell"))), "h 2.3,e 3.3,l 4.3,l 1.3")
