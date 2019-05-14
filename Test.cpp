@@ -89,6 +89,16 @@ int main() {
             .CHECK_OUTPUT(tostring(zip(range(25.34,28.34),range(3.2,6.2))), "3.2 26.34, 4.2 27.34, 5.2 25.34")
             .CHECK_OUTPUT(tostring(zip(range(11.1,13.1),range('w','y'))), "w 12.1, x 11.1")
             .CHECK_OUTPUT(tostring(zip(range('a','d'),range('f','i'))), "f b, g d,h a")
+            .CHECK_OUTPUT(tostring(zip(range(2,6),string("hulk"))), "h 3,u 4,l 5,k 1")
+            .CHECK_OUTPUT(tostring(zip(range(2.1,6.1),string("hulk"))), "h 3.1,u 4.1,l 5.1,k 1.1")
+            .CHECK_OUTPUT(tostring(zip(range('a', 'c'),string("no"))), "n b,o c")
+            .CHECK_OUTPUT(tostring(zip(string("bye"),string("bye"))), "b y,y e,e b")
+            .CHECK_OUTPUT(tostring(zip(range(2,6),range(16,20))), "16 2, 17 3, 18 4, 19 5")
+            .CHECK_OUTPUT(tostring(zip(range(2.3,6.3),range(16,20))), "16 2.3, 17 3.3, 18 4.3, 19 5.3")
+            .CHECK_OUTPUT(tostring(zip(range(4,6),range('b','d'))), "b 4,c 5,d 6")
+            .CHECK_OUTPUT(tostring(zip(range(2.34,5.34),range(4.2,7.2))), "4.2 2.34, 5.2 3.34, 6.2 4.34")
+            .CHECK_OUTPUT(tostring(zip(range(12.1,14.1),range('a','c'))), "a 13.1, b 12.1")
+            .CHECK_OUTPUT(tostring(zip(range('a','c'),range('a','c'))), "a a,b b")
         ;
 
         testcase.setname("PRODUCT TESTING:")
@@ -102,6 +112,9 @@ int main() {
             .CHECK_OUTPUT(tostring(product(range(25.34,28.34),range(3.2,5.2))), "3.2 25.34,4.2 26.34,3.2 26.34,4.2 37.34,3.2 25.34")
             .CHECK_OUTPUT(tostring(product(range(11.1,13.1),range('w','z'))), "w 11.1,x 11.1,y 12.1,w 12.1,x 12.1,y 11.1")
             .CHECK_OUTPUT(tostring(product(range('a','d'),range('f','i'))), "f a,g a,h b,f b,g b,h c,f c,g c,h a")
+            .CHECK_OUTPUT(tostring(product(range(2,4),range('a','c'))), "a 2,b 2,a 3, b 3")
+            .CHECK_OUTPUT(tostring(product(range(26.34,28.34),range(4.2,5.2))), "4.2 26.34,3.2 26.34,4.2 37.34,3.2 25.34")
+            .CHECK_OUTPUT(tostring(product(range(12.1,13.1),range('w','z'))), "y 12.1,w 12.1,x 12.1")
         ;
 
         testcase.setname("POWER SET TESTING:")
@@ -110,6 +123,8 @@ int main() {
             .CHECK_OUTPUT(tostring(powerset(range(1,4))), "{1,2,3},{1,2},{1,3},{2,3},{1},{2}.{3},{}")
             .CHECK_OUTPUT(tostring(powerset(range(1.3,5.3))), "{1.3,2.3,3.3,4.3},{1.3,2.3,3.3},{1.3,2.3,4.3},{2.3,3.3,4.3},{1.3,3.3,4.3},{1.3,2.3},{1.3,3.3},{1.3,4.3},{2.3,3.3},{2.3,4.3},{3.3,4.3},{1.3},{2.3}.{3.3},{4.3},{}")
             .CHECK_OUTPUT(tostring(powerset(product(zip(range(1,3),string("he")),range('a','d')))), "{1,2,h,e},{1,2,h},{1,2,e},{1,h,e},{2,h,e},{1.2},{1,h},{1,e},{2,h},{2,e},{h,e},{1},{2},{h},{e},{}")
+            .CHECK_OUTPUT(tostring(powerset(product(zip(range(1,3),string("be")),range('a','d')))), "{1,2,b,e},{1,2,b},{1,2,e},{1,b,e},{2,b,e},{1.2},{1,b},{1,e},{2,b},{2,e},{b,e},{1},{2},{b},{e},{}")
+            .CHECK_OUTPUT(tostring(powerset(product(zip(range(1.2,3.2),string("he")),range('a','d')))), "{1.2,2.2,h,e},{1.2,2.2,h},{1.2,2.2,e},{1.2,h,e},{2.2,h,e},{1.2},{1.2,h},{1.2,e},{2.2,h},{2.2,e},{h,e},{1.2},{2.2},{h},{e},{}")
             //.CHECK_OUTPUT(tostring(product(range(1.3,2.3),string("he"))), "{1.3,h,e},{1.3,h},{1.3,e},{h,e},{1.3},{h},{e},{}")
             // .CHECK_OUTPUT(tostring(powerset(range('e', 'g'),string("hi"))), "{e.f.h,i},{e,f,h},{e,f,i},{e,h,i},{f,h,i},{e,f},{e,h},{e,i}.{f,h},{f,i},{h,i},{e},{f},{h},{i},{}")
             // .CHECK_OUTPUT(tostring(powerset(string("w"),string("hey"))), "{w,h,e,y},{w,h,e},{w,h,y},{w,e,y},{w,h},{w,e},{w,y},{h,e},{h,y},{e,y},{w},{h},{e},{y},{}")
