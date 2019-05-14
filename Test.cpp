@@ -125,6 +125,8 @@ int main() {
             .CHECK_OUTPUT(tostring(powerset(product(zip(range(1,3),string("he")),range('a','d')))), "{1,2,h,e},{1,2,h},{1,2,e},{1,h,e},{2,h,e},{1.2},{1,h},{1,e},{2,h},{2,e},{h,e},{1},{2},{h},{e},{}")
             .CHECK_OUTPUT(tostring(powerset(product(zip(range(1,3),string("be")),range('a','d')))), "{1,2,b,e},{1,2,b},{1,2,e},{1,b,e},{2,b,e},{1.2},{1,b},{1,e},{2,b},{2,e},{b,e},{1},{2},{b},{e},{}")
             .CHECK_OUTPUT(tostring(powerset(product(zip(range(1.2,3.2),string("he")),range('a','d')))), "{1.2,2.2,h,e},{1.2,2.2,h},{1.2,2.2,e},{1.2,h,e},{2.2,h,e},{1.2},{1.2,h},{1.2,e},{2.2,h},{2.2,e},{h,e},{1.2},{2.2},{h},{e},{}")
+            .CHECK_OUTPUT(tostring(powerset(product(zip(range(2,4),range(3,5)),range('a','c')))), "{}, {2}, {3}, {4}, {a}, {b}, {2,a},{3,a},{4,a},  {2,b},{3,b},{4,b}, {2,3,4,a,b}, {2,3,4,a}, {2,3,4,b}, {2,3,a},{2,3,b},{2,4,a},{2,4,b},{3,4,a},{3,4,b}")
+            .CHECK_OUTPUT(tostring(powerset(tostring("hi"), string("bye"))), "{}, {h},{i},{b},{y},{e},{h,b},{h,y},{h,e},{i,b},{i,y},{i,e},{h,b,y}, {i,b,y},{h,b,e},{i,b,e},{h,y,e},{i,y,e}, {h,i,b,y,e}")
             //.CHECK_OUTPUT(tostring(product(range(1.3,2.3),string("he"))), "{1.3,h,e},{1.3,h},{1.3,e},{h,e},{1.3},{h},{e},{}")
             // .CHECK_OUTPUT(tostring(powerset(range('e', 'g'),string("hi"))), "{e.f.h,i},{e,f,h},{e,f,i},{e,h,i},{f,h,i},{e,f},{e,h},{e,i}.{f,h},{f,i},{h,i},{e},{f},{h},{i},{}")
             // .CHECK_OUTPUT(tostring(powerset(string("w"),string("hey"))), "{w,h,e,y},{w,h,e},{w,h,y},{w,e,y},{w,h},{w,e},{w,y},{h,e},{h,y},{e,y},{w},{h},{e},{y},{}")
