@@ -1,19 +1,22 @@
 #pragma once
+#include <iostream>
 
 using namespace std;
 
 namespace itertools{
-	
+	template <typename T,typename E>
+	std::ostream &operator<<(std::ostream &os, const std::pair<T,E>&p)
+	{
+    	os << p.first << ',' << p.second;
+    	return os;
+	}
+
 	template<typename T,typename S> class zip{
 
-		public:
+		private:
 		//Varaiables
 		T start;
 		S start2; 
-
-		//Constructor
-		zip(T firstValue, S secondValue) : start(firstValue), start2(secondValue){}
-
 
 		//-------------------------------------------------------------------
 		// iterator related code:
@@ -22,34 +25,38 @@ namespace itertools{
 		
 		template<typename A,typename B> class iterator {
 			private:
-			A value;
-			B value2;
+			A it1;
+			B it2;
 			public:
 			//Constructor
-			iterator(A firstStart, B secondStart):  value(firstStart),value2(secondStart){}
+			iterator(A firstStart, B secondStart):  it1(firstStart),it2(secondStart){}
 
-			// The method is const as this operator does not allow changing of the iterator.
-			// Note that it returns T& as it allows to change what it points to.
-			T operator*() const {
-				return value;
+			bool operator!=(zip::iterator<A,B> const &other){
+					return (it1 != other.it1) && (it2 != other.it2);
 			}
-			// ++i; 
-			iterator* operator++() {
-				value++;
-				return this;
+
+			std::pair<decltype(*it1),decltype(*it2)> operator*() const {
+				return std::pair<decltype(*it1),decltype(*it2)>(*it1,*it2);
 			}
-			
-			bool operator!=(const iterator& other) const {
-				return value != (other.value);
+
+			zip::iterator<A,B> &operator++() {
+				++it1;
+				++it2;
+				return *this;
 			}
 		}; //end iterator
 
+		public:
+
+		//Constructor
+		zip(T firstValue, S secondValue) : start(firstValue), start2(secondValue){}
+
 		auto begin() const{
-			return (start.begin(), start2.begin());
+			return zip::iterator<decltype(start.begin()),decltype(start2.begin())>(start.begin(),start2.begin());
 		}
-		
+
 		auto end() const{
-			return (start.end(), start2.end());
+			return zip::iterator<decltype(start.end()),decltype(start2.end())>(start.end(), start2.end());
 		}
 		
 
