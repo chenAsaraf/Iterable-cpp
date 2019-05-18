@@ -6,10 +6,11 @@ namespace itertools{
 	
 	template<typename T> class range{
 
-		public:
-		//Varaiables
+		private:
 		T start;
-		T finish; 
+		T finish;
+
+		public:
 
 		//Constructor
 		range(T firstiValue, T secondiValue) : start(firstiValue), finish(secondiValue){}

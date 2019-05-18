@@ -2,57 +2,47 @@
 
 using namespace std;
 
-namespace itertools{
-	
+namespace itertools {
 	template<typename T,typename S> class product{
+		private:
+		T first;
+		S second;
+		
+		template<typename A,typename B> class iterator{
+			private:
+			A it1;
+			B it2;
+			public:
+			A holder = it1;
+			iterator(A i1,B i2):it1(i1),it2(i2){}
+			bool operator!=(product::iterator<A,B> const &other){
+				if(it1 == other.it1) {
+					it1 = holder;
+					it2++;
+				}
+				return it1 != other.it1 && it2 != other.it2;
+			}
+
+			std::pair<decltype(*it1),decltype(*it2)> operator*() const {
+				return std::pair<decltype(*it1),decltype(*it2)>(*it1,*it2);
+			}
+
+			product::iterator<A,B> &operator++() {
+				it1++;
+				return *this;
+			}
+		};
 
 		public:
-		//Varaiables
-		T start;
-		S start2; 
 
-		//Constructor
-		product(T firstValue, S secondValue) : start(firstValue), start2(secondValue){}
-
-
-		//-------------------------------------------------------------------
-		// iterator related code:
-		// inner class and methods that return instances of it)
-		//-------------------------------------------------------------------
-		
-		template<typename A,typename B> class iterator {
-			private:
-			A value;
-			B value2;
-			public:
-			//Constructor
-			iterator(A firstStart, B secondStart):  value(firstStart),value2(secondStart){}
-
-			// The method is const as this operator does not allow changing of the iterator.
-			// Note that it returns T& as it allows to change what it points to.
-			T operator*() const {
-				return value;
-			}
-
-			// ++i; 
-			iterator* operator++() {
-				value++;
-				return this;
-			}
-
-			bool operator!=(const iterator& other) const {
-				return value != (other.value);
-			}
-		}; //end iterator
+		product(T x,S y):first(x),second(y){}
 
 		auto begin() const{
-			return (start.begin(), start2.begin());
+			return product::iterator<decltype(first.begin()),decltype(second.begin())>(first.begin(),second.begin());
 		}
-		
-		auto end() const{
-			return (start.end(), start2.end());
-		}
-		
 
-	};//end of class range
-};//end namespace itertools
+		auto end() const{
+			return product::iterator<decltype(first.end()),decltype(second.end())>(first.end(), second.end());
+		}
+	};
+}
