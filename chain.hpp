@@ -24,8 +24,8 @@ namespace itertools {
 			}
 
 			decltype(*it1) operator*() const {
-				if(!isFend) return *it1;
-				return *it2;
+				//if(isFend) return *it2;
+				return *it1;
 			}
 
 			chain::iterator<A,B> &operator++() {
