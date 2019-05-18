@@ -7,6 +7,7 @@
 
 
 #include <iostream>
+#include <sstream>
 using namespace std;
 
 #include "range.hpp"
@@ -16,10 +17,19 @@ using namespace std;
 #include "powerset.hpp"
 using namespace itertools;
 
+template<typename Iterable>
+string iterable_to_string(const Iterable& iterable) {
+	ostringstream ostr;
+	for (auto i: iterable)
+		ostr << i << ",";
+	return ostr.str();
+}
+
 int main() {
 	cout << endl << endl << "Range of ints: " << endl;
 	for (int i: range(5,9))
 		cout << i;    // 5678
+	cout << endl;
 	cout << endl << endl << "Range of doubles: " << endl;
 	for (double i: range(5.1,9.1))
 		cout << i << " ";    // 5.1 6.1 7.1 8.1
@@ -37,7 +47,7 @@ int main() {
 	for (int i: chain(range(1,4), range(5,8)))
 		cout << i;    // prints 123567
 	cout << endl << endl << "Chain of a range and a string: " << endl;
-	for (char i: chain(range('a','e'), string("hello")))
+	for (char i: chain(range(1,4), string("hello")))
 		cout << i;    // abcdhello
 
 	cout << endl << endl << "Zip a range of ints and a string (must be of the same size)" << endl;
@@ -57,5 +67,9 @@ int main() {
 	cout << endl << endl << "Power-set of chain " << endl;
 	for (auto subset: powerset(chain(range('a','c'),range('x','z'))))
 		cout << subset;  // {}{a}{b}{a,b}{x}{a,x}{b,x}{a,b,x}{y}{a,y}{b,y}{a,b,y}{x,y}{a,x,y}{b,x,y}{a,b,x,y}
+	cout << endl;
+	cout << iterable_to_string(powerset(chain(range('a','c'),range('x','z')))) << endl;
 	return 0;
 }
+
+

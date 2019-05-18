@@ -16,9 +16,9 @@ namespace itertools {
 			A holder = it1;
 			iterator(A i1,B i2):it1(i1),it2(i2){}
 			bool operator!=(product::iterator<A,B> const &other){
-				if(it1 == other.it1) {
+				if(!(it1 != other.it1)) {
 					it1 = holder;
-					it2++;
+					++it2;
 				}
 				return it1 != other.it1 && it2 != other.it2;
 			}
@@ -28,7 +28,7 @@ namespace itertools {
 			}
 
 			product::iterator<A,B> &operator++() {
-				it1++;
+				++it1;
 				return *this;
 			}
 		};
