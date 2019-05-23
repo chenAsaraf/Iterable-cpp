@@ -19,28 +19,32 @@ namespace itertools {
 			
 			public:
 			//Variabels(public)
-			A holder = first;
+			A holder = second;//A holder = first;
 			
 			//Iterator constructor
 			iterator(A iterator_1, B iterator_2) : first(iterator_1), second(iterator_2) {}
 			
 			//Operator !=
 			bool operator!=(product::iterator<A,B> const &other){
-				if(!(first != other.first)) {
-					first = holder;
-					++second;
+// 				if(!(first != other.first)) {
+// 					first = holder;
+// 					++second;
+// 				}
+				if(!(second != other.second)) {
+					second = holder;
+					++first;
 				}
 				return first != other.first && second != other.second;
 			}
 			
 			//Operator *	
-			std::pair<decltype(*second),decltype(*first)> operator*() const {
-				return std::pair<decltype(*second),decltype(*first)>(*second, *first);
+			std::pair<decltype(*first),decltype(*second)> operator*() const {
+				return std::pair<decltype(*first),decltype(*second)>(*first, *second);
 			}
 			
 			//Operator ++i
 			product::iterator<A,B> &operator++() {
-				++first;
+				++second;//++first;
 				return *this;
 			}
 			
