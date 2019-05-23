@@ -19,17 +19,13 @@ namespace itertools {
 			
 			public:
 			//Variabels(public)
-			B holder = second;//A holder = first;
+			B holder = second;
 			
 			//Iterator constructor
 			iterator(A iterator_1, B iterator_2) : first(iterator_1), second(iterator_2) {}
 			
 			//Operator !=
 			bool operator!=(product::iterator<A,B> const &other){
-// 				if(!(first != other.first)) {
-// 					first = holder;
-// 					++second;
-// 				}
 				if(!(second != other.second)) {
 					second = holder;
 					++first;
@@ -44,7 +40,7 @@ namespace itertools {
 			
 			//Operator ++i
 			product::iterator<A,B> &operator++() {
-				++second;//++first;
+				++second;;
 				return *this;
 			}
 			
