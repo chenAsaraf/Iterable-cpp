@@ -3,61 +3,72 @@
 using namespace std;
 
 namespace itertools {
+	/*~Class chain- Represents a concatenation of two container-like.~*/
 	template<typename T,typename S> class chain{
 		private:
-		T first;
-		S second;
+		T iterable1;
+		S iterable2;
 		
+		//Inner class Iterator
 		template<typename A,typename B> class iterator{
 			private:
-			A it1;
-			B it2;
+			//Variabels (private)
+			A first;
+			B second;
+			
 			public:
-			iterator(A i1,B i2):it1(i1),it2(i2){}
-
-			bool isFend = false;
-			//---------------chen update---------------------------//
+			//Variabels (public)
+			bool isFirstEnd = false;
+			
+			//Iterator constructor
+			iterator(A iterator_1,B iterator_2):first(iterator_1),second(iterator_2){}
+			
+			//Operator ==
 			bool operator ==(chain::iterator<A,B> const &other){
-				return (*it1==*other.it1) && (*it2==*other.it2);
+				return (*first==*other.first) && (*second==*other.second);
 			}
 			
-			// i++; 
+			//Operator i++
 			iterator operator++(int) {
 				iterator tmp= *this;
-				if(!isFend) it1++;
-				else it2++;
+				if(!isFirstEnd) first++;
+				else second++;
 				return tmp;
 			}
-			//-----------------------------------------------------//
 			
+			//Operator !=
 			bool operator!=(chain::iterator<A,B> const &other){
-				if(!isFend && it1 == other.it1) isFend = true;
-				if(isFend) return it2 != other.it2;
-				return it1 != other.it1;
+				if(!isFirstEnd && first == other.first) isFirstEnd = true;
+				if(isFirstEnd) return second != other.second;
+				return first != other.first;
 			}
 
+			//Operator *
 			auto operator*() const {
-				if(isFend) return *it2;
-				return *it1;
+				if(isFirstEnd) return *second;
+				return *first;
 			}
-
+			
+			//Operator ++i
 			chain::iterator<A,B> &operator++() {
-				if(!isFend) it1++;
-				else it2++;
+				if(!isFirstEnd) first++;
+				else second++;
 				return *this;
 			}
 		};
 
 		public:
-
-		chain(T x,S y):first(x),second(y){}
+		
+		//Chain constructor
+		chain(T t,S s):iterable1(t),iterable2(s){}
 
 		auto begin() const{
-			return chain::iterator<decltype(first.begin()),decltype(second.begin())>(first.begin(),second.begin());
+			return chain::iterator<decltype(iterable1.begin()),decltype(iterable2.begin())>(iterable1.begin(),iterable2.begin());
 		}
 
 		auto end() const{
-			return chain::iterator<decltype(first.end()),decltype(second.end())>(first.end(), second.end());
+			return chain::iterator<decltype(iterable1.end()),decltype(iterable2.end())>(iterable1.end(), iterable2.end());
 		}
-	};
-}
+	};//end class chain
+	
+};//end namespace iteratools
