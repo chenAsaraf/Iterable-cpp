@@ -19,7 +19,7 @@ namespace itertools {
 			
 			public:
 			//Variabels(public)
-			A holder = second;//A holder = first;
+			B holder = second;//A holder = first;
 			
 			//Iterator constructor
 			iterator(A iterator_1, B iterator_2) : first(iterator_1), second(iterator_2) {}
