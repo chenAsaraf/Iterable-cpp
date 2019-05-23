@@ -27,7 +27,7 @@ namespace itertools {
 				return it1 != other.it1;
 			}
 
-			decltype(*it1) operator*() const {
+			auto operator*() const {
 				if(isFend) return *it2;
 				return *it1;
 			}
