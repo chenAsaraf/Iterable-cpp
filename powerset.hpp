@@ -52,7 +52,7 @@ namespace itertools{
 			}
 			
 			//Operator ++i
-			powerset::iterator<E> &operator++() {
+			_powerset::iterator<E> &operator++() {
 				++I;
 				return *this;
 			}
