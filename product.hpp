@@ -34,8 +34,8 @@ namespace itertools {
 			}
 			
 			//Operator *	
-			std::pair<decltype(*first),decltype(*second)> operator*() const {
-				return std::pair<decltype(*first),decltype(*second)>(*second, *first);
+			std::pair<decltype(*second),decltype(*first)> operator*() const {
+				return std::pair<decltype(*second),decltype()>(*second, *first);
 			}
 			
 			//Operator ++i
