@@ -16,11 +16,9 @@ namespace itertools{
 		range(T firstiValue, T secondiValue) : start(firstiValue), finish(secondiValue){}
 
 
-		//-------------------------------------------------------------------
-		// iterator related code:
-		// inner class and methods that return instances of it)
-		//-------------------------------------------------------------------
+		//Iterator Inner class:
 		class iterator {
+			
 			private:
 			T it1;
 			
@@ -29,33 +27,29 @@ namespace itertools{
 			iterator(T rangeStartElement):  it1(rangeStartElement){}
 
 			// The method is const as this operator does not allow changing of the iterator.
-			// Note that it returns T& as it allows to change what it points to.
 			T operator*() const {
 				return it1;
 			}
 
-			T* operator->() const {
-				return &it1;
-			}
-
-			// ++i; 
+			//Opertator ++i; 
 			iterator* operator++() {
 				it1++;
 				return this;
 			}
 
-			// i++; 
-			// Usually iterators are passed by it1 and not by const& as they are small.
+			//Operator i++; 
 			const iterator operator++(int) {
 				iterator tmp= *this;
 				it1++;
 				return tmp; 		
 			}
-
+			
+			//Opertor ==
 			bool operator==(const iterator& other) const {
 				return it1 == (other.it1);
 			}
-
+			
+			//Operator !=
 			bool operator!=(const iterator& other) const {
 				return it1 != (other.it1);
 			}
@@ -72,4 +66,5 @@ namespace itertools{
 		
 
 	};//end of class range
+	
 };//end namespace itertools
