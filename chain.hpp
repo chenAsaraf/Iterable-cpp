@@ -16,7 +16,11 @@ namespace itertools {
 			iterator(A i1,B i2):it1(i1),it2(i2){}
 
 			bool isFend = false;
-
+			
+			bool operator ==(chain::iterator<A,B> const &other){
+				return (*it1==*other.it1) && (*it2==*other.it2);
+			}
+			
 			bool operator!=(chain::iterator<A,B> const &other){
 				if(!isFend && it1 == other.it1) isFend = true;
 				if(isFend) return it2 != other.it2;
