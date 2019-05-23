@@ -3,46 +3,61 @@
 using namespace std;
 
 namespace itertools {
+	
+	/*~Class product - represent cartesian product~*/
 	template<typename T,typename S> class product{
 		private:
-		T first;
-		S second;
+		T iterabel1;
+		S iterabel2;
 		
+		//Inner class iterator
 		template<typename A,typename B> class iterator{
 			private:
-			A it1;
-			B it2;
+			//Variabels(private)
+			A first;
+			B second;
+			
 			public:
-			A holder = it1;
-			iterator(A i1,B i2):it1(i1),it2(i2){}
+			//Variabels(public)
+			A holder = first;
+			
+			//Iterator constructor
+			iterator(A iterator_1, B iterator_2) : first(iterator_1), second(iterator_2) {}
+			
+			//Operator !=
 			bool operator!=(product::iterator<A,B> const &other){
-				if(!(it1 != other.it1)) {
-					it1 = holder;
-					++it2;
+				if(!(first != other.first)) {
+					first = holder;
+					++second;
 				}
-				return it1 != other.it1 && it2 != other.it2;
+				return first != other.first && second != other.second;
 			}
-
-			std::pair<decltype(*it1),decltype(*it2)> operator*() const {
-				return std::pair<decltype(*it1),decltype(*it2)>(*it1,*it2);
+			
+			//Operator *	
+			std::pair<decltype(*first),decltype(*second)> operator*() const {
+				return std::pair<decltype(*first),decltype(*second)>(*second, *first);
 			}
-
+			
+			//Operator ++i
 			product::iterator<A,B> &operator++() {
-				++it1;
+				++first;
 				return *this;
 			}
-		};
+			
+		};//end class iterator
 
 		public:
-
-		product(T x,S y):first(x),second(y){}
-
+		//Product constructor
+		product(T x,S y):iterabel1(x),iterabel2(y){}
+		
 		auto begin() const{
-			return product::iterator<decltype(first.begin()),decltype(second.begin())>(first.begin(),second.begin());
+			return product::iterator<decltype(iterabel1.begin()),decltype(iterabel2.begin())>(iterabel1.begin(),iterabel2.begin());
 		}
 
 		auto end() const{
-			return product::iterator<decltype(first.end()),decltype(second.end())>(first.end(), second.end());
+			return product::iterator<decltype(iterabel1.end()),decltype(iterabel2.end())>(iterabel1.end(), iterabel2.end());
 		}
-	};
-}
+		
+	};//end class product
+	
+};//end namespace iteratools
