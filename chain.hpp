@@ -17,7 +17,7 @@ namespace itertools {
 
 			bool isFend = false;
 
-			bool operator!=(chain::iterator<A,B> const &other){
+			bool operator!=(chain::iterator<A,B> const &other) const{
 				if(!isFend && it1 == other.it1) isFend = true;
 				if(isFend) return it2 != other.it2;
 				return it1 != other.it1;
