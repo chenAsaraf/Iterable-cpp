@@ -8,7 +8,7 @@ namespace itertools{
 	template <class T> class _powerset{ 
 		private:
 		//Variabels
-		T _from;
+		T start;
 		
 		//Inner class iterator
 		template <class E> class iterator {
@@ -61,14 +61,14 @@ namespace itertools{
 		
 		public:
 		//_powerset constructor
-		_powerset(T from) : _from(from) {}    
+		_powerset(T from) : start(from) {}    
 		
 		auto begin() const {
-			return _powerset::iterator<decltype(_from.begin())>(_from.begin(), _from.end());
+			return _powerset::iterator<decltype(start.begin())>(start.begin(), start.end());
 		} 
 		
     		auto end() const { 
-			return _powerset::iterator<decltype(_from.begin())>(_from.end(), _from.end()); 
+			return _powerset::iterator<decltype(start.begin())>(start.end(), start.end()); 
 		}
 		
 	};//end class _powerset
