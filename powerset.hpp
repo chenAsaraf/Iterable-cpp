@@ -9,17 +9,13 @@ namespace itertools{
 		private:
 		//Variabels
 		T start;
-		
-		//Inner class iterator
 		template <class E> class iterator {
-			
 			public:
 			E it1;
 			E it2;
         		unsigned int I;
        			unsigned int NumOfE;
 			
-			//Iterator constructor
 			iterator(E itr_start, E itr_fin) :
 			it1(itr_start), it2(itr_fin), I(0), NumOfE(0) {
 				E element_iterator = it1;
@@ -30,13 +26,10 @@ namespace itertools{
 				NumOfE = std::pow(2, NumOfE);
 			}
 			
-			
-			//Operator !=
 			bool operator!=(_powerset::iterator<E> const &other) const {
 				return ((NumOfE - I) != (other.NumOfE - other.I - 1));
 			}
 			
-			//Operator *
 			auto operator*() const {
 				E element_iterator = it1;
 				std::vector<typename std::remove_const<typename std::remove_reference<decltype(*it1)>::type>::type> S;
@@ -51,34 +44,29 @@ namespace itertools{
 				return S;
 			}
 			
-			//Operator ++i
 			_powerset::iterator<E> &operator++() {
 				++I;
 				return *this;
 			}
-			
-		};//end class iterator
+		};
 		
 		public:
-		//_powerset constructor
 		_powerset(T from) : start(from) {}    
-		
 		auto begin() const {
 			return _powerset::iterator<decltype(start.begin())>(start.begin(), start.end());
 		} 
-		
     		auto end() const { 
 			return _powerset::iterator<decltype(start.begin())>(start.end(), start.end()); 
 		}
 		
-	};//end class _powerset
+	};
 	
-	//Function to iterate over the pwerset of container
+	//this function is to used to iterate over the powersets container
 	template <typename T> _powerset<T> powerset(T from){
 		return _powerset<T>(from);
 	}
 	
-	//Output operator for std::vector
+	//override output operator for std::vector
 	template <typename T> std::ostream &operator<<(std::ostream &stream, const std::vector<T> &S){
 		stream << "{";
 		auto temp = S.begin();
@@ -94,4 +82,4 @@ namespace itertools{
 		return stream;
 	}
 	
-};//end namespace itertools
+};
