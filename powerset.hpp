@@ -5,10 +5,10 @@
 
 namespace itertools{
 	/*~Class powerset - represents all sub-groups of container-like~*/
-	template <class T> class powerset{ 
+	template <class T> class _powerset{ 
 		private:
 		//Variabels
-		T start;
+		T _from;
 		
 		//Inner class iterator
 		template <class E> class iterator {
@@ -32,7 +32,7 @@ namespace itertools{
 			
 			
 			//Operator !=
-			bool operator!=(powerset::iterator<E> const &other) const {
+			bool operator!=(_powerset::iterator<E> const &other) const {
 				return ((NumOfE - I) != (other.NumOfE - other.I - 1));
 			}
 			
@@ -52,7 +52,7 @@ namespace itertools{
 			}
 			
 			//Operator ++i
-			powerset::iterator<E> &operator++() {
+			_powerset::iterator<E> &operator++() {
 				++I;
 				return *this;
 			}
@@ -60,21 +60,22 @@ namespace itertools{
 		};//end class iterator
 		
 		public:
-		powerset(T beg) : start(beg) {}    
+		//_powerset constructor
+		_powerset(T from) : _from(from) {}    
 		
 		auto begin() const {
-			return powerset::iterator<decltype(start.begin())>(start.begin(), start.end());
+			return _powerset::iterator<decltype(_from.begin())>(_from.begin(), _from.end());
 		} 
 		
     		auto end() const { 
-			return powerset::iterator<decltype(start.begin())>(start.end(), start.end()); 
+			return _powerset::iterator<decltype(_from.begin())>(_from.end(), _from.end()); 
 		}
 		
-	};
+	};//end class _powerset
 	
 	//Function to iterate over the pwerset of container
-	template <typename T> powerset<T> powerset(T beg){
-		return powerset<T>(beg);
+	template <typename T> _powerset<T> powerset(T from){
+		return _powerset<T>(from);
 	}
 	
 	//Output operator for std::vector
